@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>noWhy — Lista de espera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #0c0c0c;
+      --white:  #ffffff;
+      --gray-1: #a0a0a0;
+      --gray-2: #555555;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── NAV ─────────────────────────────────── */
+    nav {
+      flex-shrink: 0;
+      padding: 28px 6vw;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: fadeIn 0.7s ease both;
+    }
+
+    .logo img {
+      height: 24px;
+      width: auto;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .nav-back {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--gray-2);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    /* ─── MAIN ────────────────────────────────── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 6vw;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    /* Eyebrow */
+    .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-2);
+      margin-bottom: 2.2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--gray-2);
+      flex-shrink: 0;
+    }
+
+    /* ─── HEADLINE ────────────────────────────── */
+    h1 {
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 4.5rem;
+    }
+    .h1-thin {
+      display: block;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(44px, 8vw, 112px);
+      color: var(--gray-1);
+    }
+    .h1-bold {
+      display: block;
+      font-weight: 700;
+      font-size: clamp(44px, 8vw, 112px);
+      color: var(--white);
+    }
+
+    /* ─── FORM BLOCK ──────────────────────────── */
+    .form-block { max-width: 700px; }
+
+    .subtitle {
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: var(--gray-2);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 420px;
+    }
+
+    /* Fila inline */
+    .form-row {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      transition: border-color 0.25s;
+    }
+    .form-row:focus-within { border-color: rgba(255,255,255,0.22); }
+
+    .form-row input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--border);
+      outline: none;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 0.84rem;
+      padding: 18px 22px;
+      letter-spacing: 0.02em;
+      min-width: 0;
+      transition: background 0.2s;
+    }
+    .form-row input:focus { background: rgba(255,255,255,0.02); }
+    .form-row input::placeholder { color: var(--gray-2); }
+
+    .btn-submit {
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      color: var(--bg);
+      background: var(--white);
+      border: none;
+      padding: 18px 26px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .btn-submit:hover { opacity: 0.82; }
+    .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .social-proof {
+      font-size: 0.70rem;
+      font-weight: 300;
+      color: var(--gray-2);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .proof-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gray-2);
+      flex-shrink: 0;
+    }
+
+    /* ─── SUCCESS STATE ───────────────────────── */
+    .success-state        { display: none; }
+    .success-state.visible{ display: block; animation: fadeUp 0.6s ease both; }
+    .form-block.hidden    { display: none; }
+
+    .success-num {
+      font-weight: 700;
+      font-size: clamp(64px, 11vw, 150px);
+      letter-spacing: -0.05em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .success-label {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--gray-2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 2.8rem;
+    }
+
+    .success-msg {
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: var(--gray-1);
+      line-height: 1.8;
+      max-width: 380px;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+
+    /* ─── FOOTER ──────────────────────────────── */
+    footer {
+      flex-shrink: 0;
+      padding: 22px 6vw;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo img { height: 18px; width: auto; opacity: 0.35; }
+
+    .footer-copy {
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--gray-2);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── FIELD ERRORS ───────────────────────── */
+    .field-errors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.15rem 1.4rem;
+      min-height: 0.9rem;
+      margin-top: -0.7rem;
+      margin-bottom: 0.7rem;
+    }
+    .field-error {
+      font-size: 0.67rem;
+      font-weight: 300;
+      color: #ff5a5a;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+    .field-error.visible { opacity: 1; }
+
+    /* ─── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 680px) {
+      main { padding: 52px 6vw; justify-content: flex-start; }
+
+      h1 { margin-bottom: 3rem; }
+
+      .form-row {
+        flex-direction: column;
+        border-radius: 4px;
+      }
+      .form-row input {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .btn-submit { padding: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html"><img src="noWhy.png" alt="noWhy" /></a>
+  <a href="index.html" class="nav-back">
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+      <path d="M13 7H1M6 11l-4-4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Volver
+  </a>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <div class="eyebrow">Lista de espera</div>
+
+  <h1>
+    <span class="h1-thin">Deja de procrastinar,</span>
+    <span class="h1-bold">de una vez.</span>
+  </h1>
+
+  <!-- Formulario -->
+  <div class="form-block" id="form-block">
+    <p class="subtitle">noWhy está por llegar. Sé de los primeros en acceder a la experiencia de enfoque que estabas buscando.</p>
+    <form class="form-row" id="form" novalidate>
+      <input type="text"  id="name"  placeholder="Tu nombre" autocomplete="off" required />
+      <input type="email" id="email" placeholder="Tu correo" autocomplete="off" required />
+      <button class="btn-submit" type="submit" id="submit-btn">Reservar mi lugar →</button>
+    </form>
+    <div class="field-errors">
+      <span class="field-error" id="name-error">El nombre debe tener al menos 2 caracteres</span>
+      <span class="field-error" id="email-error">Ingresa un correo válido</span>
+    </div>
+    <div class="social-proof">
+      <span class="proof-dot"></span>
+      <span id="live-count">···</span> personas ya en lista
+    </div>
+  </div>
+
+  <!-- Éxito -->
+  <div class="success-state" id="success">
+    <div class="eyebrow" style="margin-bottom:1.8rem">Confirmado</div>
+    <div class="success-num" id="pos-num">#484</div>
+    <div class="success-label">Tu posición en lista</div>
+    <div class="success-msg">
+      Eres parte de algo. Cuando noWhy esté listo,<br>serás de los primeros en saberlo.<br><br>
+      Mientras tanto, cierra las pestañas que no necesitas.
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="noWhy.png" alt="noWhy" /></div>
+  <div class="footer-copy">© 2026 noWhy · Todos los derechos reservados</div>
+</footer>
+
+<script>
+(function () {
+  // ── Contador dinámico ──────────────────────────────────────────────────
+  const EPOCH   = new Date('2026-03-01T00:00:00Z').getTime();
+  const BASE    = 120;
+  const TICK_MS = 4 * 60 * 60 * 1000;
+
+  let offset = parseInt(sessionStorage.getItem('nw_wl_off') || '-1', 10);
+  if (offset < 0) {
+    offset = Math.floor(Math.random() * 8);
+    sessionStorage.setItem('nw_wl_off', String(offset));
+  }
+
+  function getLiveCount() {
+    const ticks = Math.max(0, Math.floor((Date.now() - EPOCH) / TICK_MS));
+    return BASE + ticks + offset;
+  }
+
+  const liveCountEl = document.getElementById('live-count');
+  if (liveCountEl) liveCountEl.textContent = getLiveCount();
+
+  // ── Formulario ─────────────────────────────────────────────────────────
+  const SHEET_URL = 'https://script.google.com/a/macros/grupomsm.co/s/AKfycbzukOIXF2z97UkuSZC0rhncnPYmkH3Vl5RDEMSzuuVE3XqK4iSF7uRc7runE5eJWz6QDg/exec';
+
+  const form       = document.getElementById('form');
+  const formBlock  = document.getElementById('form-block');
+  const success    = document.getElementById('success');
+  const submitBtn  = document.getElementById('submit-btn');
+  const nameInput  = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const posNum     = document.getElementById('pos-num');
+  const nameError  = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+
+  function showError(el, show) {
+    el.classList.toggle('visible', show);
+  }
+
+  function isValidEmail(email) {
+    if (!email || email.includes(' ')) return false;
+    const atIdx = email.indexOf('@');
+    if (atIdx < 1) return false;
+    const domain = email.slice(atIdx + 1);
+    const dotIdx = domain.lastIndexOf('.');
+    if (dotIdx < 1) return false;
+    return domain.slice(dotIdx + 1).length >= 2;
+  }
+
+  nameInput.addEventListener('input', () => {
+    if (nameInput.value.trim().length >= 2) showError(nameError, false);
+  });
+  emailInput.addEventListener('input', () => {
+    if (isValidEmail(emailInput.value.trim())) showError(emailError, false);
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name    = nameInput.value.trim();
+    const email   = emailInput.value.trim();
+    const nameOk  = name.length >= 2;
+    const emailOk = isValidEmail(email);
+
+    showError(nameError,  !nameOk);
+    showError(emailError, !emailOk);
+    if (!nameOk || !emailOk) return;
+
+    submitBtn.disabled    = true;
+    submitBtn.textContent = 'Guardando...';
+
+    fetch(SHEET_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body:    JSON.stringify({ name, email, timestamp: new Date().toISOString() }),
+      redirect: 'follow',
+    }).catch(() => {});
+
+    setTimeout(() => {
+      posNum.textContent = '#' + (getLiveCount() + 1 + Math.floor(Math.random() * 3));
+      formBlock.classList.add('hidden');
+      success.classList.add('visible');
+    }, 900);
+  });
+})();
+</script>
+</body>
+</html>

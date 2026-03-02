@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>noWhy — Tu modo foco activado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0c0c0c;
+      --white:   #ffffff;
+      --gray-1:  #a0a0a0;
+      --gray-2:  #555555;
+      --border:  rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ─── NAV ─────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 6vw;
+      border-bottom: 1px solid var(--border);
+      animation: fadeIn 0.7s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .logo img {
+      height: 26px;
+      width: auto;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .btn-nav {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      color: var(--bg);
+      background: var(--white);
+      border: none;
+      border-radius: 4px;
+      padding: 10px 22px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+    .btn-nav:hover { opacity: 0.82; }
+
+    /* ─── HERO ────────────────────────────────── */
+    .hero {
+      padding: 110px 6vw 120px;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.70rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-2);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gray-2);
+      flex-shrink: 0;
+    }
+
+    h1 {
+      margin-bottom: 2.5rem;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+    }
+    .h1-thin {
+      display: block;
+      font-weight: 300;
+      font-size: clamp(52px, 7vw, 96px);
+      color: var(--gray-1);
+      font-style: italic;
+    }
+    .h1-bold {
+      display: block;
+      font-weight: 700;
+      font-size: clamp(52px, 7vw, 96px);
+      color: var(--white);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.86rem, 1.3vw, 0.98rem);
+      font-weight: 300;
+      color: var(--gray-2);
+      line-height: 1.75;
+      max-width: 380px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.84rem;
+      color: var(--bg);
+      background: var(--white);
+      border: none;
+      border-radius: 4px;
+      padding: 14px 34px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.82; }
+
+    .btn-text {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--gray-2);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.02em;
+    }
+    .btn-text:hover { color: var(--white); }
+    .btn-text svg { transition: transform 0.2s; }
+    .btn-text:hover svg { transform: translateX(3px); }
+
+    /* ─── DIVIDER ─────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── FEATURES ────────────────────────────── */
+    .features-section {
+      padding: 110px 6vw;
+    }
+
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-2);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--gray-2);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 4rem;
+      max-width: 460px;
+      color: var(--white);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 860px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--bg);
+      padding: 44px 36px;
+      transition: background 0.25s;
+    }
+    .card:hover { background: rgba(255,255,255,0.02); }
+
+    .card-num {
+      font-size: 0.66rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      color: var(--gray-2);
+      margin-bottom: 2.2rem;
+    }
+
+    .card-title {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-body {
+      font-size: 0.79rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--gray-2);
+    }
+
+    /* ─── STATS ───────────────────────────────── */
+    .stats-section {
+      padding: 100px 6vw;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 3rem;
+    }
+
+    .stat-number {
+      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.76rem;
+      font-weight: 300;
+      color: var(--gray-2);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── HOW IT WORKS ────────────────────────── */
+    .how-section {
+      padding: 110px 6vw;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .step {
+      background: var(--bg);
+      padding: 44px 30px;
+      transition: background 0.25s;
+    }
+    .step:hover { background: rgba(255,255,255,0.02); }
+
+    .step-num {
+      font-size: 0.66rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      color: var(--gray-2);
+      margin-bottom: 2.2rem;
+    }
+
+    .step-title {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .step-body {
+      font-size: 0.77rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--gray-2);
+    }
+
+    /* ─── CTA ─────────────────────────────────── */
+    .cta-section {
+      padding: 130px 6vw;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-section .section-title {
+      font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── FOOTER ──────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo img { height: 20px; width: auto; opacity: 0.4; }
+
+    .footer-copy {
+      font-size: 0.70rem;
+      font-weight: 300;
+      color: var(--gray-2);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 768px) {
+      .h1-thin, .h1-bold { font-size: clamp(44px, 12vw, 72px); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#"><img src="noWhy.png" alt="noWhy" /></a>
+  <a href="register.html" class="btn-nav">Empieza gratis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Música · Enfoque · Pomodoro</div>
+  <h1>
+    <span class="h1-thin">Tu modo foco,</span>
+    <span class="h1-bold">activado.</span>
+  </h1>
+  <p class="hero-subtitle">Música científica que activa tu cerebro cuando más lo necesitas. Binaural beats combinados con la técnica Pomodoro.</p>
+  <div class="hero-cta">
+    <a href="register.html" class="btn-primary">Empieza ahora</a>
+    <a href="#features" class="btn-text">
+      Ver cómo funciona
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+        <path d="M1 7h12M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="section-eyebrow">Características</div>
+  <div class="section-title">Todo lo que necesitas para entrar en zona</div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-title">Ondas binaurales</div>
+      <p class="card-body">Frecuencias alpha y theta sincronizadas para inducir estados de concentración profunda en minutos.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-title">Timer Pomodoro integrado</div>
+      <p class="card-body">Ciclos de 25 minutos de enfoque + 5 de descanso. La música se adapta automáticamente a cada fase.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-title">Estadísticas de sesión</div>
+      <p class="card-body">Visualiza tu progreso diario, racha de sesiones y el tiempo total en estado de hiperfoco.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number" data-target="250">0%</div>
+      <div class="stat-label">Aumento en productividad</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="18">0K</div>
+      <div class="stat-label">Usuarios activos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="4.9">0</div>
+      <div class="stat-label">Valoración media</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="60">0s</div>
+      <div class="stat-label">Para entrar en modo foco</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-eyebrow">Cómo funciona</div>
+  <div class="section-title">4 pasos para activar tu modo foco</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Elige tu tarea</div>
+      <p class="step-body">Indica qué tipo de trabajo vas a realizar: estudio, código, escritura o diseño. noWhy se adapta.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Activa la música</div>
+      <p class="step-body">En menos de 60 segundos las ondas binaurales sincronizan tu cerebro al estado óptimo de concentración.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Trabaja en ciclos</div>
+      <p class="step-body">El timer Pomodoro guía tus sesiones. La música cambia automáticamente entre foco y descanso.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Analiza tu progreso</div>
+      <p class="step-body">Al finalizar, ve tus estadísticas: tiempo en foco, ciclos completados y racha semanal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="section-eyebrow">Empieza hoy</div>
+  <div class="section-title">Tu cerebro está listo para el siguiente nivel</div>
+  <a href="register.html" class="btn-primary">Empieza gratis ahora</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="noWhy.png" alt="noWhy" /></div>
+  <div class="footer-copy">© 2026 noWhy · Todos los derechos reservados</div>
+</footer>
+
+<script>
+/* STATS COUNTER */
+(function() {
+  const statsSection = document.querySelector('.stats-section');
+  let animated = false;
+
+  const items = [
+    { el: statsSection.querySelectorAll('.stat-number')[0], target: 250, suffix: '%', decimals: 0 },
+    { el: statsSection.querySelectorAll('.stat-number')[1], target: 18,  suffix: 'K', decimals: 0 },
+    { el: statsSection.querySelectorAll('.stat-number')[2], target: 4.9, suffix: '',  decimals: 1 },
+    { el: statsSection.querySelectorAll('.stat-number')[3], target: 60,  suffix: 's', decimals: 0 },
+  ];
+
+  function animateCount(item) {
+    const duration = 1600;
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      const val = item.target * ease;
+      item.el.textContent = (item.decimals ? val.toFixed(1) : Math.round(val)) + item.suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !animated) {
+      animated = true;
+      items.forEach(item => animateCount(item));
+    }
+  }, { threshold: 0.4 });
+
+  observer.observe(statsSection);
+})();
+</script>
+</body>
+</html>
