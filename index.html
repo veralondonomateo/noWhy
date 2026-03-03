@@ -67,6 +67,24 @@
     }
     .btn-nav:hover { opacity: 0.82; }
 
+    .btn-nav-outline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      color: var(--gray-1);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 10px 22px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+    .btn-nav-outline:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
     /* ─── HERO ────────────────────────────────── */
     .hero {
       padding: 110px 6vw 120px;
@@ -360,7 +378,10 @@
 <!-- NAV -->
 <nav>
   <a class="logo" href="#"><img src="noWhy.png" alt="noWhy" /></a>
-  <a href="register.html" class="btn-nav">Empieza gratis</a>
+  <div class="nav-actions">
+    <a href="waitlist.html" class="btn-nav-outline">Lista de espera</a>
+    <a href="register.html" class="btn-nav">Empieza gratis</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -372,7 +393,7 @@
   </h1>
   <p class="hero-subtitle">Música científica que activa tu cerebro cuando más lo necesitas. Binaural beats combinados con la técnica Pomodoro.</p>
   <div class="hero-cta">
-    <a href="register.html" class="btn-primary">Empieza ahora</a>
+    <a href="waitlist.html" class="btn-primary">Unirme a la lista de espera</a>
     <a href="#features" class="btn-text">
       Ver cómo funciona
       <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
@@ -461,7 +482,7 @@
 <section class="cta-section" id="cta">
   <div class="section-eyebrow">Empieza hoy</div>
   <div class="section-title">Tu cerebro está listo para el siguiente nivel</div>
-  <a href="register.html" class="btn-primary">Empieza gratis ahora</a>
+  <a href="waitlist.html" class="btn-primary">Unirme a la lista de espera</a>
 </section>
 
 <!-- FOOTER -->
