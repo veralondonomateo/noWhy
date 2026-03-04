@@ -16,6 +16,8 @@
       --gray-1:  #a0a0a0;
       --gray-2:  #555555;
       --border:  rgba(255,255,255,0.07);
+      --accent:  #4f8ef7;
+      --accent2: #a259ff;
     }
 
     html { scroll-behavior: smooth; }
@@ -27,6 +29,10 @@
       font-weight: 300;
       overflow-x: hidden;
       min-height: 100vh;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size: 80px 80px;
     }
 
     /* ─── NAV ─────────────────────────────────── */
@@ -89,7 +95,33 @@
     .hero {
       padding: 110px 6vw 120px;
       animation: fadeUp 0.8s 0.15s ease both;
+      position: relative;
+      overflow: hidden;
     }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -220px;
+      left: -180px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(79,142,247,0.07) 0%, transparent 62%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 10%;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(162,89,255,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -151,6 +183,11 @@
       flex-wrap: wrap;
     }
 
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+      50%       { box-shadow: 0 0 22px 3px rgba(255,255,255,0.09); }
+    }
+
     .btn-primary {
       font-family: 'Inter', sans-serif;
       font-weight: 500;
@@ -164,6 +201,7 @@
       transition: opacity 0.2s;
       text-decoration: none;
       display: inline-block;
+      animation: pulse-glow 3.5s ease-in-out infinite;
     }
     .btn-primary:hover { opacity: 0.82; }
 
@@ -237,9 +275,12 @@
     .card {
       background: var(--bg);
       padding: 44px 36px;
-      transition: background 0.25s;
+      transition: background 0.25s, box-shadow 0.35s;
     }
-    .card:hover { background: rgba(255,255,255,0.02); }
+    .card:hover {
+      background: rgba(255,255,255,0.025);
+      box-shadow: 0 0 50px rgba(79,142,247,0.07), inset 0 0 0 1px rgba(79,142,247,0.08);
+    }
 
     .card-num {
       font-size: 0.66rem;
@@ -284,6 +325,7 @@
       color: var(--white);
       line-height: 1;
       margin-bottom: 8px;
+      text-shadow: 0 0 60px rgba(255,255,255,0.18);
     }
 
     .stat-label {
@@ -309,9 +351,12 @@
     .step {
       background: var(--bg);
       padding: 44px 30px;
-      transition: background 0.25s;
+      transition: background 0.25s, box-shadow 0.35s;
     }
-    .step:hover { background: rgba(255,255,255,0.02); }
+    .step:hover {
+      background: rgba(255,255,255,0.025);
+      box-shadow: 0 0 50px rgba(79,142,247,0.07), inset 0 0 0 1px rgba(79,142,247,0.08);
+    }
 
     .step-num {
       font-size: 0.66rem;
@@ -339,7 +384,20 @@
     .cta-section {
       padding: 130px 6vw;
       border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
     }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -120px;
+      width: 580px;
+      height: 580px;
+      background: radial-gradient(circle, rgba(162,89,255,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-section > * { position: relative; z-index: 1; }
 
     .cta-section .section-title {
       font-size: clamp(1.8rem, 3.4vw, 2.8rem);
@@ -369,7 +427,45 @@
 
     /* ─── RESPONSIVE ──────────────────────────── */
     @media (max-width: 768px) {
-      .h1-thin, .h1-bold { font-size: clamp(44px, 12vw, 72px); }
+      .h1-thin, .h1-bold { font-size: clamp(38px, 11vw, 66px); }
+
+      /* Nav buttons — más compactos en móvil */
+      nav { padding: 18px 5vw; }
+      .nav-actions { gap: 8px; }
+      .btn-nav,
+      .btn-nav-outline {
+        font-size: 0.70rem;
+        padding: 7px 12px;
+        border-radius: 3px;
+        letter-spacing: 0.01em;
+      }
+
+      /* Hero */
+      .hero { padding: 80px 6vw 90px; }
+
+      /* Steps — 2×2 centrados */
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .step {
+        padding: 30px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      /* Stats en móvil */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      /* Sections padding */
+      .features-section,
+      .how-section { padding: 70px 6vw; }
+      .stats-section { padding: 70px 6vw; }
+      .cta-section { padding: 90px 6vw; }
     }
   </style>
 </head>
