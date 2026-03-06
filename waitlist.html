@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>noWhy — Lista de espera</title>
+  <title>noWhy — Waitlist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -315,46 +315,46 @@
     <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
       <path d="M13 7H1M6 11l-4-4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    Volver
+    Back
   </a>
 </nav>
 
 <!-- MAIN -->
 <main>
 
-  <div class="eyebrow">Lista de espera</div>
+  <div class="eyebrow">Waitlist</div>
 
   <h1>
-    <span class="h1-thin">Deja de procrastinar,</span>
-    <span class="h1-bold">de una vez.</span>
+    <span class="h1-thin">Begin your</span>
+    <span class="h1-bold">running journey.</span>
   </h1>
 
   <!-- Formulario -->
   <div class="form-block" id="form-block">
-    <p class="subtitle">noWhy está por llegar. Sé de los primeros en acceder a la experiencia de enfoque que estabas buscando.</p>
+    <p class="subtitle">A starter kit built for your first miles — everything you need to start running, and a community designed to help you grow.</p>
     <form class="form-row" id="form" novalidate>
-      <input type="text"  id="name"  placeholder="Tu nombre" autocomplete="off" required />
-      <input type="email" id="email" placeholder="Tu correo" autocomplete="off" required />
-      <button class="btn-submit" type="submit" id="submit-btn">Reservar mi lugar →</button>
+      <input type="text"  id="name"  placeholder="Your name" autocomplete="off" required />
+      <input type="email" id="email" placeholder="Your email" autocomplete="off" required />
+      <button class="btn-submit" type="submit" id="submit-btn">Claim my spot →</button>
     </form>
     <div class="field-errors">
-      <span class="field-error" id="name-error">El nombre debe tener al menos 2 caracteres</span>
-      <span class="field-error" id="email-error">Ingresa un correo válido</span>
+      <span class="field-error" id="name-error">Name must be at least 2 characters</span>
+      <span class="field-error" id="email-error">Enter a valid email address</span>
     </div>
     <div class="social-proof">
       <span class="proof-dot"></span>
-      <span id="live-count">···</span> personas ya en lista
+      <span id="live-count">···</span> runners already in
     </div>
   </div>
 
   <!-- Éxito -->
   <div class="success-state" id="success">
-    <div class="eyebrow" style="margin-bottom:1.8rem">Confirmado</div>
+    <div class="eyebrow" style="margin-bottom:1.8rem">You're in</div>
     <div class="success-num" id="pos-num">#484</div>
-    <div class="success-label">Tu posición en lista</div>
+    <div class="success-label">Your spot on the list</div>
     <div class="success-msg">
-      Eres parte de algo. Cuando noWhy esté listo,<br>serás de los primeros en saberlo.<br><br>
-      Mientras tanto, cierra las pestañas que no necesitas.
+      You're part of something real. When the kit is ready,<br>you'll be one of the first to know.<br><br>
+      Until then — go for a run.
     </div>
   </div>
 
@@ -363,7 +363,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo"><img src="noWhy.png" alt="noWhy" /></div>
-  <div class="footer-copy">© 2026 noWhy · Todos los derechos reservados</div>
+  <div class="footer-copy">© 2026 noWhy · All rights reserved</div>
 </footer>
 
 <script>
@@ -476,7 +476,7 @@
     if (!nameOk || !emailOk) return;
 
     submitBtn.disabled    = true;
-    submitBtn.textContent = 'Guardando...';
+    submitBtn.textContent = 'Saving...';
 
     fetch(SHEET_URL, {
       method:  'POST',
